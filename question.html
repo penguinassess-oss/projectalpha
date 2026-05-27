@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Paper</title>
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #e0e0e0;
+            margin: 0;
+            padding: 20px;
+        }
+        .paper-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .back-btn {
+            background: #e0e0e0;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-bottom: 20px;
+            box-shadow: 3px 3px 6px rgba(0,0,0,0.1);
+        }
+        .back-btn:hover {
+            transform: scale(1.02);
+        }
+        h1 {
+            color: #2266cc;
+            border-bottom: 3px solid #2266cc;
+            padding-bottom: 10px;
+        }
+        .paper-info {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .mcq-section, .creative-section {
+            margin: 30px 0;
+        }
+        .section-title {
+            background: #2266cc;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .question-card {
+            background: #f9f9f9;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #2266cc;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 10px 0;
+        }
+        .option {
+            background: white;
+            padding: 8px 15px;
+            border-radius: 25px;
+            border: 1px solid #ddd;
+        }
+        .answer {
+            color: green;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .creative-card {
+            background: #f0f7ff;
+            margin: 15px 0;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        .stimulus {
+            background: #e8f4e8;
+            padding: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .sub-q {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+        @media (max-width: 600px) {
+            .paper-container { padding: 15px; }
+            .options { flex-direction: column; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="paper-container">
+        <button class="back-btn" onclick="history.back()">← Back to Timeline</button>
+        
+        <h1 id="subject">Loading...</h1>
+        <div class="paper-info" id="paperInfo"></div>
+        
+        <div id="mcqContainer" class="mcq-section"></div>
+        <div id="creativeContainer" class="creative-section"></div>
+    </div>
+
+    <script>
+        // Get paper ID from URL (e.g., ?id=chemistry-2023-dhaka)
+        const urlParams = new URLSearchParams(window.location.search);
+        const paperId = urlParams.get('id');
+        
+        if (!paperId) {
+            document.body.innerHTML = '<div class="paper-container"><h1>Error: No paper selected</h1><button onclick="history.back()">Go Back</button></div>';
+            return;
+        }
+        
+        // Fetch the JSON file
+        fetch('question.json')
+            .then(response => {
+                if (!response.ok) throw new Error('JSON file not found');
+                return response.json();
+            })
+            .then(data => {
+                // Handle both formats (array or single object)
+                let paper;
+                if (Array.isArray(data)) {
+                    paper = data.find(p => p.id === paperId);
+                } else if (data.papers) {
+                    paper = data.papers.find(p => p.id === paperId);
+                } else if (data.id === paperId) {
+                    paper = data;
+                } else {
+                    paper = null;
+                }
+                
+                if (!paper) {
+                    throw new Error('Paper not found with ID: ' + paperId);
+                }
+                
+                displayPaper(paper);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                document.getElementById('subject').innerHTML = 'Error Loading Paper';
+                document.getElementById('paperInfo').innerHTML = `
+                    <div style="color: red; padding: 20px;">
+                        <h3>Could not load question paper</h3>
+                        <p>Make sure question.json exists and contains the paper with ID: ${paperId}</p>
+                        <button onclick="history.back()">← Go Back</button>
+                    </div>
+                `;
+            });
+        
+        function displayPaper(paper) {
+            // Set header
+            document.getElementById('subject').innerText = paper.subject || 'Question Paper';
+            document.getElementById('paperInfo').innerHTML = `
+                <strong>Board:</strong> ${paper.board} | 
+                <strong>Year:</strong> ${paper.year} |
+                <strong>Type:</strong> ${paper.examType || 'MCQ + Creative'} |
+                <strong>Total Marks:</strong> ${paper.totalMarks || '100'} |
+                <strong>Time:</strong> ${paper.time || '2 hours 35 min'}
+            `;
+            
+            // Display MCQ Section
+            if (paper.mcqSection && paper.mcqSection.questions) {
+                let mcqHtml = `
+                    <div class="section-title">
+                        📝 Multiple Choice Questions (MCQ)
+                        <span style="font-size: 14px; float: right;">Marks: ${paper.mcqSection.marksPerQuestion || 1} each | Total: ${paper.mcqSection.totalQuestions || paper.mcqSection.questions.length}</span>
+                    </div>
+                `;
+                
+                paper.mcqSection.questions.forEach(q => {
+                    mcqHtml += `
+                        <div class="question-card">
+                            <div class="question-text">${q.number}. ${q.question}</div>
+                            <div class="options">
+                                ${q.options.map(opt => `<span class="option">${opt}</span>`).join('')}
+                            </div>
+                            <div class="answer">✓ Answer: ${q.answer} ${q.answerLetter ? '(' + q.answerLetter + ')' : ''}</div>
+                        </div>
+                    `;
+                });
+                document.getElementById('mcqContainer').innerHTML = mcqHtml;
+            } else if (paper.mcqs) {
+                // Alternative format support
+                let mcqHtml = `<div class="section-title">📝 Multiple Choice Questions (MCQ)</div>`;
+                paper.mcqs.forEach((q, i) => {
+                    mcqHtml += `
+                        <div class="question-card">
+                            <div class="question-text">${i+1}. ${q.question}</div>
+                            <div class="options">${q.options.map(opt => `<span class="option">${opt}</span>`).join('')}</div>
+                            <div class="answer">✓ Answer: ${q.answer}</div>
+                        </div>
+                    `;
+                });
+                document.getElementById('mcqContainer').innerHTML = mcqHtml;
+            } else {
+                document.getElementById('mcqContainer').innerHTML = '<div class="section-title">📝 MCQ Section</div><p>No MCQ data available.</p>';
+            }
+            
+            // Display Creative Section
+            if (paper.creativeSection && paper.creativeSection.questions) {
+                let creativeHtml = `
+                    <div class="section-title">
+                        ✍️ Creative Questions (CQ)
+                        <span style="font-size: 14px; float: right;">Answer any ${paper.creativeSection.answerAny || 5} out of ${paper.creativeSection.totalQuestions || 8}</span>
+                    </div>
+                `;
+                
+                paper.creativeSection.questions.forEach(q => {
+                    creativeHtml += `
+                        <div class="creative-card">
+                            <div class="question-text">Question ${q.number}:</div>
+                            <div class="stimulus">${q.question}</div>
+                            <div style="margin-top: 10px; font-weight: bold;">Sub-questions:</div>
+                            <div>
+                                ${q.subQuestions.map((sq, idx) => `<div class="sub-q">${String.fromCharCode(97+idx)}. ${sq}</div>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('creativeContainer').innerHTML = creativeHtml;
+            } else if (paper.creative) {
+                let creativeHtml = `<div class="section-title">✍️ Creative Questions</div>`;
+                paper.creative.forEach((c, i) => {
+                    creativeHtml += `
+                        <div class="creative-card">
+                            <div class="stimulus">${c.stimulus}</div>
+                            <div class="sub-questions">
+                                ${c.sub_questions.map(sq => `<div class="sub-q">• ${sq}</div>`).join('')}
+                            </div>
+                        </div>
+                    `;
+                });
+                document.getElementById('creativeContainer').innerHTML = creativeHtml;
+            } else {
+                document.getElementById('creativeContainer').innerHTML = '<div class="section-title">✍️ Creative Section</div><p>No creative questions available.</p>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SSC Question Papers - Timeline</title>
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: sans-serif; background: #000000; }
+
+  .tl-wrap { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    padding: 2rem 1rem 3rem; 
+    position: relative; 
+    background: #e0e0e0; 
+    min-height: 800px; 
+  }
+
+  .tl-title { 
+    font-size: 28px; 
+    font-weight: 500; 
+    color: #333;
+    letter-spacing: 1px; 
+    text-align: center; 
+    margin-bottom: 2rem; 
+    align-self: center; 
+    line-height: 1.2; 
+  }
+
+  .tl-line { 
+    position: absolute; 
+    left: 50%; 
+    top: 110px; 
+    bottom: 50px; 
+    width: 2px; 
+    background: #555; 
+    transform: translateX(-50%); 
+    z-index: 0; 
+  }
+
+  .tl-row { 
+    display: flex; 
+    width: 100%; 
+    align-items: center; 
+    margin: -25px 0;
+    position: relative; 
+    z-index: 1; 
+    height: 100px; 
+  }
+
+  .tl-row.left { justify-content: flex-start; }
+  .tl-row.right { justify-content: flex-end; }
+
+  .tl-link {
+    text-decoration: none;
+    transition: transform 0.2s ease;
+  }
+  .tl-link:hover {
+    transform: scale(1.05);
+  }
+
+  .tl-card {
+    background: #e0e0e0;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    min-width: 120px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 12px;
+    position: relative;
+    box-shadow: 7px 7px 14px rgba(0,0,0,0.2), -5px -5px 12px rgba(255,255,255,0.9);
+    cursor: pointer;
+  }
+
+  .tl-row.left .tl-link { margin-left: calc(50% - 120px - 40px); }
+  .tl-row.right .tl-link { margin-right: calc(50% - 120px - 40px); }
+
+  .tl-connector {
+    height: 2px;
+    width: 40px;
+    background: #555;
+    flex-shrink: 0;
+  }
+
+  .tl-year { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .tl-text { font-size: 10px; color: #666; line-height: 1.3; margin: 0; }
+
+  .tl-dot {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid #555;
+    background: #e0e0e0;
+    z-index: 2;
+    box-shadow: 2px 2px 4px rgba(0,0,0,0.2), -1px -1px 3px rgba(255,255,255,0.8);
+  }
+</style>
+</head>
+<body>
+
+<div class="tl-wrap">
+  <div class="tl-title">📚 SSC Question Papers 2023<br>Chemistry - All Boards</div>
+  <div class="tl-line"></div>
+
+  <div class="tl-row left">
+    <a href="question.html?id=chemistry-2023-dhaka" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#e8a020;">2023</div>
+        <p class="tl-text">Dhaka Board<br>Chemistry</p>
+      </div>
+    </a>
+    <div class="tl-connector"></div>
+    <div class="tl-dot"></div>
+  </div>
+
+  <div class="tl-row right">
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+    <a href="question.html?id=chemistry-2023-rajshahi" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#2ea84e;">2023</div>
+        <p class="tl-text">Rajshahi Board<br>Chemistry</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="tl-row left">
+    <a href="question.html?id=chemistry-2023-comilla" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#2266cc;">2023</div>
+        <p class="tl-text">Comilla Board<br>Chemistry</p>
+      </div>
+    </a>
+    <div class="tl-connector"></div>
+    <div class="tl-dot"></div>
+  </div>
+
+  <div class="tl-row right">
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+    <a href="question.html?id=chemistry-2023-jessore" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#9933cc;">2023</div>
+        <p class="tl-text">Jessore Board<br>Chemistry</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="tl-row left">
+    <a href="question.html?id=chemistry-2023-chittagong" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#cc2222;">2023</div>
+        <p class="tl-text">Chittagong Board<br>Chemistry</p>
+      </div>
+    </a>
+    <div class="tl-connector"></div>
+    <div class="tl-dot"></div>
+  </div>
+
+  <div class="tl-row right">
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+    <a href="question.html?id=chemistry-2023-barisal" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#ff9800;">2023</div>
+        <p class="tl-text">Barisal Board<br>Chemistry</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="tl-row left">
+    <a href="question.html?id=chemistry-2023-sylhet" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#9c27b0;">2023</div>
+        <p class="tl-text">Sylhet Board<br>Chemistry</p>
+      </div>
+    </a>
+    <div class="tl-connector"></div>
+    <div class="tl-dot"></div>
+  </div>
+
+  <div class="tl-row right">
+    <div class="tl-dot"></div>
+    <div class="tl-connector"></div>
+    <a href="question.html?id=chemistry-2023-mymensingh" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#00bcd4;">2023</div>
+        <p class="tl-text">Mymensingh Board<br>Chemistry</p>
+      </div>
+    </a>
+  </div>
+
+  <div class="tl-row left">
+    <a href="question.html?id=chemistry-2023-dinajpur" class="tl-link">
+      <div class="tl-card">
+        <div class="tl-year" style="color:#607d8b;">2023</div>
+        <p class="tl-text">Dinajpur Board<br>Chemistry</p>
+      </div>
+    </a>
+    <div class="tl-connector"></div>
+    <div class="tl-dot"></div>
+  </div>
+
+</div>
+
+</body>
+</html>

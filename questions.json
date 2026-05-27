@@ -1,0 +1,94 @@
+{
+  "papers": [
+    {
+      "id": "chemistry-2023-dhaka",
+      "subject": "Chemistry",
+      "year": 2023,
+      "board": "Dhaka",
+      "examType": "MCQ + Creative",
+      "totalMarks": 100,
+      "time": "2 hours 35 minutes",
+      "mcqSection": {
+        "marksPerQuestion": 1,
+        "totalQuestions": 25,
+        "questions": [
+          {
+            "number": 1,
+            "question": "Which ion has the smallest size?",
+            "options": ["Na⁺", "K⁺", "Mg²⁺", "Al³⁺"],
+            "answer": "Al³⁺",
+            "answerLetter": "H"
+          },
+          {
+            "number": 2,
+            "question": "What percentage of water is present in human body?",
+            "options": ["10%", "40%", "60%", "96%"],
+            "answer": "60%",
+            "answerLetter": "G"
+          }
+        ]
+      },
+      "creativeSection": {
+        "totalQuestions": 8,
+        "answerAny": 5,
+        "questions": [
+          {
+            "number": 1,
+            "question": "Creative question on SO₃ and CaCl₂",
+            "subQuestions": [
+              "What are radicals?",
+              "How are anions formed?",
+              "Explain the bond formation in CaCl₂.",
+              "Which rule applies for bond formation in SO₃?"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "chemistry-2023-rajshahi",
+      "subject": "Chemistry",
+      "year": 2023,
+      "board": "Rajshahi",
+      "examType": "MCQ + Creative",
+      "totalMarks": 100,
+      "time": "2 hours 35 minutes",
+      "mcqSection": {
+        "marksPerQuestion": 1,
+        "totalQuestions": 25,
+        "questions": [
+          {
+            "number": 1,
+            "question": "Which ion has the smallest size?",
+            "options": ["Na⁺", "K⁺", "Mg²⁺", "Al³⁺"],
+            "answer": "Al³⁺",
+            "answerLetter": "H"
+          },
+          {
+            "number": 2,
+            "question": "What percentage of water is present in human body?",
+            "options": ["10%", "40%", "60%", "96%"],
+            "answer": "60%",
+            "answerLetter": "G"
+          }
+        ]
+      },
+      "creativeSection": {
+        "totalQuestions": 8,
+        "answerAny": 5,
+        "questions": [
+          {
+            "number": 1,
+            "question": "Creative question on SO₃ and CaCl₂",
+            "subQuestions": [
+              "What are radicals?",
+              "How are anions formed?",
+              "Explain the bond formation in CaCl₂.",
+              "Which rule applies for bond formation in SO₃?"
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
